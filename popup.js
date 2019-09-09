@@ -22,8 +22,7 @@ function hide() {
 }
 
 function isNumber(event) {
-    let keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
+    let keys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     keys.forEach(key => {
         if (event.key !== key) {
             return false;
@@ -55,5 +54,16 @@ function loadData() {
 }
 
 
-// $('#register_mobile,#register_phone').mask("999999999", {placeholder: "_________"});
+$.fn.andSelf = function() {
+    return this.addBack.apply(this, arguments);
+}
+
+$(document).ready(function () {
+    console.log($('#phone_number'));
+    // $("#phone_number").mask('99999999');
+    $('#phone_number').mask('999999999');
+
+    // jQuery('#phone_number').inputmask("999999999");
+});
+
 

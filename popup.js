@@ -40,5 +40,20 @@ function isNumber(event) {
     }
 }
 
+function loadData() {
+    xhr.open('GET', 'https://randomuser.me/api/?inc=gender,name,picture,location&results=8&nat=g', true);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) return;
+
+        if (xhr.status !== 200) {
+            console.log(xhr.status + ': ' + xhr.statusText);
+        } else {
+            console.log(JSON.parse(xhr.responseText));
+        }
+    };
+}
+
+
 // $('#register_mobile,#register_phone').mask("999999999", {placeholder: "_________"});
 

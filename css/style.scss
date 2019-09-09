@@ -21,6 +21,32 @@ body {
   top: 0px;
   z-index: 100000;
 
+  //.slideDown {
+  //  animation-name: slideRight;
+  //  animation-duration: 5s;
+  //  animation-timing-function: ease;
+  //}
+  //
+  //@keyframes slideDown {
+  //  0% {
+  //    transform: translateY(-100%);
+  //  }
+  //  50%{
+  //    transform: translateY(8%);
+  //  }
+  //  65%{
+  //    transform: translateY(-4%);
+  //  }
+  //  80%{
+  //    transform: translateY(4%);
+  //  }
+  //  95%{
+  //    transform: translateY(-2%);
+  //  }
+  //  100% {
+  //    transform: translateY(0%);
+  //  }
+  //}
   .background {
     background: #000;
     height: 100%;
@@ -33,6 +59,9 @@ body {
     z-index: 900000;
     width: 713px;
     margin: 0 auto;
+    //transition: all 3s ease-in-out;
+    //height: 0px;
+    //overflow: hidden;
   }
 
   .popup-header {
@@ -95,7 +124,6 @@ body {
           width: 160px;
           height: 162px;
           background-repeat: no-repeat;
-          //padding: 10px 12px;
           margin-left: 10px;
           margin-top: 8px;
           background-position: center;
@@ -123,7 +151,6 @@ body {
               height: 30px;
               cursor: pointer;
               margin-top: 20px;
-              //padding: 20px 0px 0px 0px;
               background-repeat: no-repeat;
               background-position: center;
             }
@@ -145,12 +172,12 @@ body {
       text-align: center;
       padding: 0px 0px 15px 0px;
 
-      .hidden {
-        display: none;
+      .hide-text {
+        display: inline-block;
       }
 
-      .hide {
-        display: inline-block;
+      .hidden-text {
+        display: none;
       }
 
       .block-top-subtitle {
@@ -257,13 +284,11 @@ body {
 
 @media all and (max-width: 1024px) {
   .main-block-popup {
-    left: 155px;
   }
 }
 
 @media all and (max-width: 768px) {
   .main-block-popup {
-    left: 25px;
   }
 }
 
@@ -285,8 +310,6 @@ body {
 
 @media all and (max-width: 675px) {
   .main-block-popup {
-    left: 7px;
-
     .popup-container {
       width: 400px;
 
@@ -354,6 +377,7 @@ body {
               width: 20px !important;
               height: 20px !important;
               top: 100px;
+              margin-top: 0px;
             }
           }
 
@@ -378,11 +402,11 @@ body {
             font-size: 21px;
           }
 
-          .hidden {
+          .hidden-text {
             display: inline-block;
           }
 
-          .hide {
+          .hide-text {
             display: none;
           }
         }
@@ -394,7 +418,7 @@ body {
 @media all and (max-width: 380px) {
   .main-block-popup {
     .popup-container {
-      width: 380px;
+      width: 363px;
 
       .main-content {
         .block-content {
@@ -423,10 +447,8 @@ body {
 
 @media all and (max-width: 360px) {
   .main-block-popup {
-    left: 3px;
-
     .popup-container {
-      width: 355px;
+      width: 343px;
 
       .block-top {
         .block-text {
@@ -442,7 +464,7 @@ body {
 @media all and (max-width: 320px) {
   .main-block-popup {
     .popup-container {
-      width: 314px;
+      width: 303px;
 
       .block-top {
         .block-top-container {

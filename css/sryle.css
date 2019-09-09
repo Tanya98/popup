@@ -119,11 +119,11 @@ body {
   text-align: center;
   padding: 0px 0px 15px 0px;
 }
-.main-block-popup .popup-container .block-text .hide-text {
-  display: inline-block;
-}
-.main-block-popup .popup-container .block-text .hidden-text {
+.main-block-popup .popup-container .block-text .hidden {
   display: none;
+}
+.main-block-popup .popup-container .block-text .hide {
+  display: inline-block;
 }
 .main-block-popup .popup-container .block-text .block-top-subtitle {
   font-size: 35px;
@@ -274,7 +274,6 @@ body {
     width: 20px !important;
     height: 20px !important;
     top: 100px;
-    margin-top: 0px;
   }
   .main-block-popup .popup-container .block-top .block-top-container .block-phone-img {
     left: 115px;
@@ -291,16 +290,16 @@ body {
   .main-block-popup .popup-container .block-top .block-text .block-top-text {
     font-size: 21px;
   }
-  .main-block-popup .popup-container .block-top .block-text .hidden-text {
+  .main-block-popup .popup-container .block-top .block-text .hidden {
     display: inline-block;
   }
-  .main-block-popup .popup-container .block-top .block-text .hide-text {
+  .main-block-popup .popup-container .block-top .block-text .hide {
     display: none;
   }
 }
 @media all and (max-width: 380px) {
   .main-block-popup .popup-container {
-    width: 363px;
+    width: 380px;
   }
   .main-block-popup .popup-container .main-content .block-content .block-content-text {
     font-size: 12.5px;
@@ -314,7 +313,7 @@ body {
 }
 @media all and (max-width: 360px) {
   .main-block-popup .popup-container {
-    width: 343px;
+    width: 355px;
   }
   .main-block-popup .popup-container .block-top .block-text .block-top-text {
     font-size: 19px;
@@ -322,7 +321,7 @@ body {
 }
 @media all and (max-width: 320px) {
   .main-block-popup .popup-container {
-    width: 303px;
+    width: 314px;
   }
   .main-block-popup .popup-container .block-top .block-top-container .block-container .figure-button-block .close-button {
     right: 10px;
@@ -335,4 +334,4 @@ body {
   }
 }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=sryle.css.map */

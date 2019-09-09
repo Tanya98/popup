@@ -12,8 +12,9 @@ document.addEventListener('mousemove', function (event) {
 
 function show() {
     let popup = document.getElementById('popup');
-    // let form = document.getElementById('form');
+    let body = document.body;
     popup.style.display = 'block';
+    body.style.overflowY = 'hidden';
 }
 
 function hide() {
@@ -62,8 +63,6 @@ $(document).ready(function () {
     console.log($('#phone_number'));
     // $("#phone_number").mask('99999999');
     $('#phone_number').mask('999999999');
-
-    // jQuery('#phone_number').inputmask("999999999");
 });
 
 

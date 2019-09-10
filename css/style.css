@@ -21,11 +21,12 @@ body {
   width: 100%;
   position: absolute;
   z-index: -1;
+  overflow-y: scroll;
 }
 .main-block-popup .popup-container {
   z-index: 900000;
   width: 713px;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 .main-block-popup .popup-header {
   height: 74px;
@@ -300,7 +301,8 @@ body {
 }
 @media all and (max-width: 380px) {
   .main-block-popup .popup-container {
-    width: 363px;
+    width: 343px;
+    margin: 10px;
   }
   .main-block-popup .popup-container .main-content .block-content .block-content-text {
     font-size: 12.5px;
@@ -314,7 +316,7 @@ body {
 }
 @media all and (max-width: 360px) {
   .main-block-popup .popup-container {
-    width: 343px;
+    width: 323px;
   }
   .main-block-popup .popup-container .block-top .block-text .block-top-text {
     font-size: 19px;
@@ -322,7 +324,7 @@ body {
 }
 @media all and (max-width: 320px) {
   .main-block-popup .popup-container {
-    width: 303px;
+    width: 283px;
   }
   .main-block-popup .popup-container .block-top .block-top-container .block-container .figure-button-block .close-button {
     right: 10px;

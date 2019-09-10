@@ -53,12 +53,13 @@ body {
     width: 100%;
     position: absolute;
     z-index: -1;
+    overflow-y: scroll;
   }
 
   .popup-container {
     z-index: 900000;
     width: 713px;
-    margin: 0 auto;
+    margin: 30px auto;
     //transition: all 3s ease-in-out;
     //height: 0px;
     //overflow: hidden;
@@ -262,7 +263,6 @@ body {
         font-weight: 700;
         font-size: 36px;
         cursor: pointer;
-
         &:focus {
           outline: none;
         }
@@ -418,7 +418,8 @@ body {
 @media all and (max-width: 380px) {
   .main-block-popup {
     .popup-container {
-      width: 363px;
+      width: 343px;
+      margin: 10px;
 
       .main-content {
         .block-content {
@@ -448,7 +449,7 @@ body {
 @media all and (max-width: 360px) {
   .main-block-popup {
     .popup-container {
-      width: 343px;
+      width: 323px;
 
       .block-top {
         .block-text {
@@ -464,7 +465,7 @@ body {
 @media all and (max-width: 320px) {
   .main-block-popup {
     .popup-container {
-      width: 303px;
+      width: 283px;
 
       .block-top {
         .block-top-container {

@@ -1,17 +1,39 @@
-let count = 0;
 let xhr = new XMLHttpRequest();
+let popupCounter = 0;
+// document.addEventListener('load ', function () {
+//     console.log(setCookie('isNew', 'true'));
+// });
+
 
 document.addEventListener('mousemove', function (event) {
-    let timerId = setTimeout(() => {
-        if (event.clientY === 20 || event.clientY < 20) {
-            show();
+    // if (Boolean(cookieValue) === true) {
+    if (event.clientY === 20 || event.clientY < 20) {
+        if (popupCounter < 1) {
+            setTimeout(() => {
+                show();
+            }, 300);
+            popupCounter++;
         }
-    }, 400);
+    }
 });
 
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function setCookie(name, value) {
+    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    document.cookie = updatedCookie;
+}
 
 function show() {
     let popup = document.getElementById('popup');
+    let form = document.getElementById('form');
+    form.style.animationDuration = 5 + 's';
+    form.style.animationDelay = 3 + 's';
     let body = document.body;
     popup.style.display = 'block';
     body.style.overflowY = 'hidden';
@@ -23,15 +45,7 @@ function hide() {
 }
 
 function isNumber(event) {
-    let keys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    keys.forEach(key => {
-        if (event.key !== key) {
-            return false;
-        }
-        return true;
-    });
-
-    if (event.keyCode !== undefined && event.which) {
+    if (event.keyCode || event.which) {
         let code = event.keyCode || event.which;
         if (code !== 46 && code > 31 && (code < 48 || code > 57)) {
             return false;
@@ -40,28 +54,48 @@ function isNumber(event) {
     }
 }
 
-function loadData() {
-    xhr.open('GET', 'https://randomuser.me/api/?inc=gender,name,picture,location&results=8&nat=g', true);
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState !== 4) return;
 
-        if (xhr.status !== 200) {
-            console.log(xhr.status + ': ' + xhr.statusText);
-        } else {
-            console.log(JSON.parse(xhr.responseText));
-        }
+function submitPhoneNumber() {
+    let inputValue = document.getElementById('phone_number').value;
+    let resultMessage1 = document.getElementById('message-1');
+    let resultMessage2 = document.getElementById('message-2');
+    let info = {
+        AuthInfo: {
+            AccessKey: 'c9b64244-2dc8-44db-89a5-c6ae72997bbc',
+            ServiceUrl: 'http://dev-by-9/ecs_long/api/CustomerModule/AddPhoneNumberToAntiAbandonTool'
+        },
+        phoneNumber: inputValue
     };
+
+    let body = JSON.stringify(info);
+
+    xhr.open('POST', 'http://dev-by-9/ecs_long/api/CustomerModule/AddPhoneNumberToAntiAbandonTool', true);
+    xhr.send(body);
+    let response = xhr.responseText;
+
+    if (xhr.status !== 200) {
+        xhr.onerror = function (error) {
+            console.log(xhr.status + ': ' + xhr.statusText + error);
+        }
+    } else if (response) {
+        let statuses = Object.keys(response.AntiAbandonEntryStatus);
+        statuses.forEach(status => {
+            if (status === 'InProcess' || status === 'Removed') {
+                resultMessage2.style.display = 'block';
+            } else {
+                resultMessage1.style.display = 'block';
+            }
+        });
+    }
 }
 
 
-$.fn.andSelf = function() {
+$.fn.andSelf = function () {
     return this.addBack.apply(this, arguments);
-}
+};
 
 $(document).ready(function () {
-    console.log($('#phone_number'));
-    // $("#phone_number").mask('99999999');
+    // console.log(getCookie('isNew'));
     $('#phone_number').mask('999999999');
 });
 

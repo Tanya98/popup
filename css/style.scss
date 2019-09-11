@@ -21,32 +21,6 @@ body {
   top: 0px;
   z-index: 100000;
 
-  //.slideDown {
-  //  animation-name: slideRight;
-  //  animation-duration: 5s;
-  //  animation-timing-function: ease;
-  //}
-  //
-  //@keyframes slideDown {
-  //  0% {
-  //    transform: translateY(-100%);
-  //  }
-  //  50%{
-  //    transform: translateY(8%);
-  //  }
-  //  65%{
-  //    transform: translateY(-4%);
-  //  }
-  //  80%{
-  //    transform: translateY(4%);
-  //  }
-  //  95%{
-  //    transform: translateY(-2%);
-  //  }
-  //  100% {
-  //    transform: translateY(0%);
-  //  }
-  //}
   .background {
     background: #000;
     height: 100%;
@@ -418,7 +392,7 @@ body {
 @media all and (max-width: 380px) {
   .main-block-popup {
     .popup-container {
-      width: 343px;
+      width: 354px;
       margin: 10px;
 
       .main-content {
@@ -449,7 +423,7 @@ body {
 @media all and (max-width: 360px) {
   .main-block-popup {
     .popup-container {
-      width: 323px;
+      width: 340px;
 
       .block-top {
         .block-text {
@@ -465,14 +439,14 @@ body {
 @media all and (max-width: 320px) {
   .main-block-popup {
     .popup-container {
-      width: 283px;
+      width: 303px;
 
       .block-top {
         .block-top-container {
           .block-container {
             .figure-button-block {
               .close-button {
-                right: 10px;
+                right: 20px;
               }
             }
           }

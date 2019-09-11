@@ -300,7 +300,7 @@ body {
 }
 @media all and (max-width: 380px) {
   .main-block-popup .popup-container {
-    width: 343px;
+    width: 354px;
     margin: 10px;
   }
   .main-block-popup .popup-container .main-content .block-content .block-content-text {
@@ -315,7 +315,7 @@ body {
 }
 @media all and (max-width: 360px) {
   .main-block-popup .popup-container {
-    width: 323px;
+    width: 340px;
   }
   .main-block-popup .popup-container .block-top .block-text .block-top-text {
     font-size: 19px;
@@ -323,10 +323,10 @@ body {
 }
 @media all and (max-width: 320px) {
   .main-block-popup .popup-container {
-    width: 283px;
+    width: 303px;
   }
   .main-block-popup .popup-container .block-top .block-top-container .block-container .figure-button-block .close-button {
-    right: 10px;
+    right: 20px;
   }
   .main-block-popup .popup-container .main-content .block-content {
     width: 285px;

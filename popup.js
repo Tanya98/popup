@@ -12,7 +12,7 @@ function CookieService() {
 }
 
 function HttpService() {
-    this.post = function (url, bodty, callback) {
+    this.post = function (url, body, callback) {
 
         let xhr = new XMLHttpRequest();
         let response;

@@ -32,6 +32,19 @@ function HttpService() {
     }
 }
 
+function getDate() {
+    let now = new Date();
+    let month = now.getMonth();
+    let year = now.getFullYear();
+    let num = now.getDate();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let date = month + '/' + num + '/' + year;
+    let time = hours + ':' + minutes;
+    let userDate = date + ' ' + time;
+    return userDate;
+}
+
 function Popup(elementId) {
 
     this.show = function () {
@@ -53,10 +66,10 @@ function Popup(elementId) {
 }
 
 const popup = new Popup('popup');
-let newCookie = new CookieService();
+let newUser = new CookieService();
+let userDate = getDate();
 
 let popupCounter = 0;
-
 let userRegistered = false;
 
 let widthBody = document.body.style.width;
@@ -67,9 +80,9 @@ let screenXS = 576 + 'px';
 
 $(document).ready(function () {
 
-    newCookie.setCookie('isNew', 'true');
+    newUser.setCookie('isNew', 'true');
 
-    let isNewUser = Boolean(newCookie.getCookie('isNew'));
+    let isNewUser = Boolean(newUser.getCookie('isNew'));
 
     $(phoneNumber).mask('999999999');
 
@@ -94,7 +107,7 @@ $(document).ready(function () {
 
     document.onkeydown = function (event) {
         if (event.key === 'Escape') {
-            newCookie.setCookie('isNew', 'false');
+            newUser.setCookie('isNew', 'false');
             popup.hide();
         }
     };
@@ -122,7 +135,7 @@ function showPopUp() {
 }
 
 function hidePopUp() {
-    newCookie.setCookie('isNew', 'false');
+    newUser.setCookie('isNew', 'false');
     $('.hide-popup').click(popup.hide());
 }
 

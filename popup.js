@@ -84,16 +84,17 @@ $(document).ready(function () {
     };
 
     if (isNewUser === true) {
-        debugger;
+        // debugger;
         showPopUp();
-    } else {
+    } else if (isNewUser === false) {
         hidePopUp();
     }
 
-    hidePopUp();
+    // hidePopUp();
 
     document.onkeydown = function (event) {
         if (event.key === 'Escape') {
+            newCookie.setCookie('isNew', 'false');
             popup.hide();
         }
     };
@@ -121,8 +122,8 @@ function showPopUp() {
 }
 
 function hidePopUp() {
-    $('.hide-popup').click(popup.hide());
     newCookie.setCookie('isNew', 'false');
+    $('.hide-popup').click(popup.hide());
 }
 
 function sendPhoneNumber(phoneNumber, callback) {

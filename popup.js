@@ -63,7 +63,7 @@ let widthBody = document.body.style.width;
 let clientExists = document.getElementById('clientExists');
 let phoneNumberSaved = document.getElementById('phoneNumberSaved');
 let phoneNumber = document.getElementById('phone_number');
-
+let screenXS = 576 + 'px';
 
 $(document).ready(function () {
 
@@ -74,17 +74,32 @@ $(document).ready(function () {
     $(phoneNumber).mask('999999999');
 
     popup.submitEventHandler = function () {
-        // if (cookie.getCookie('isNew'))
         sendPhoneNumber(phoneNumber.value, function (response) {
             if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
                 phoneNumberSaved.style.display = 'block';
-            }
-            if (response.EntryStatus === 3) {
+            } else if (response.EntryStatus === 3) {
                 clientExists.style.display = 'block';
             }
         });
     };
 
+    if (isNewUser === true) {
+        debugger;
+        showPopUp();
+    } else {
+        hidePopUp();
+    }
+
+    hidePopUp();
+
+    document.onkeydown = function (event) {
+        if (event.key === 'Escape') {
+            popup.hide();
+        }
+    };
+});
+
+function showPopUp() {
     document.onmousemove = function (event) {
         if (event.clientY === 20 || event.clientY < 20) {
             userRegistered = true;
@@ -97,29 +112,18 @@ $(document).ready(function () {
         }
     };
 
-    if (widthBody <= 414 + 'px') {
+    if (widthBody <= screenXS) {
         userRegistered = true;
         setTimeout(() => {
             popup.show();
         }, 5000);
     }
+}
 
-    document.onkeydown = function (event) {
-        if (event.key === 'Escape') {
-            popup.hide();
-        }
-    };
-});
-
-// function showPopUp() {
-//     // debugger;
-//
-// }
-
-// function showPopUpForMobile() {
-//     // debugger;
-//
-// }
+function hidePopUp() {
+    $('.hide-popup').click(popup.hide());
+    newCookie.setCookie('isNew', 'false');
+}
 
 function sendPhoneNumber(phoneNumber, callback) {
     let requestBody = {

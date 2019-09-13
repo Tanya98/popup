@@ -39,7 +39,7 @@ function getDate() {
     let num = now.getDate();
     let hours = now.getHours();
     let minutes = now.getMinutes();
-    let date = month + '/' + num + '/' + year;
+    let date = month + '.' + num + '.' + year;
     let time = hours + ':' + minutes;
     let userDate = date + ' ' + time;
     return userDate;
@@ -81,6 +81,7 @@ let screenXS = 576 + 'px';
 $(document).ready(function () {
 
     newUser.setCookie('isNew', 'true');
+    newUser.setCookie('DateTime', userDate);
 
     let isNewUser = Boolean(newUser.getCookie('isNew'));
 
@@ -96,14 +97,12 @@ $(document).ready(function () {
         });
     };
 
-    if (isNewUser === true) {
-        // debugger;
+    // if (isNewUser === true) {
         showPopUp();
-    } else if (isNewUser === false) {
-        hidePopUp();
-    }
+    // } else {
+    //     hidePopUp();
+    // }
 
-    // hidePopUp();
 
     document.onkeydown = function (event) {
         if (event.key === 'Escape') {
@@ -116,7 +115,6 @@ $(document).ready(function () {
 function showPopUp() {
     document.onmousemove = function (event) {
         if (event.clientY === 20 || event.clientY < 20) {
-            userRegistered = true;
             if (popupCounter < 1) {
                 setTimeout(() => {
                     popup.show();
@@ -127,7 +125,6 @@ function showPopUp() {
     };
 
     if (widthBody <= screenXS) {
-        userRegistered = true;
         setTimeout(() => {
             popup.show();
         }, 5000);
@@ -135,6 +132,7 @@ function showPopUp() {
 }
 
 function hidePopUp() {
+    // debugger;
     newUser.setCookie('isNew', 'false');
     $('.hide-popup').click(popup.hide());
 }

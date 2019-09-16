@@ -13196,7 +13196,7 @@
     }
 </style> <!-- Plik ze stylami inline -->
 <!-- <script defer=""src="./Filarum.pl _ chwilówki online, pożyczki przez internet_files/jquery-1.9.1.min.js.download"></script> -->
-<!-- 
+<!--
 <script defer=""
         src="./Filarum.pl _ chwilówki online, pożyczki przez internet_files/grouped-js.js.download"></script> -->
 
@@ -13295,11 +13295,11 @@
             <div class="block-content">
 
                 <div class="result-message" id="clientExists">
-                    Wyglda na to, e jeste ju naszym klientem.Wró na<br> stron gówn, aby si zalogowa
+                    Wyglda na to, e jeste ju naszym klientem.Wró na stron gówn, aby si zalogowa
                 </div>
 
                 <div class="result-message" id="phoneNumberSaved">
-                    Twój numer telefonu zosta zapisany<br>poprawnie. Nasz operator wkrótce si z Tob<br>skontaktuje
+                    Twój numer telefonu zosta zapisany poprawnie. Nasz operator wkrótce si z Tob skontaktuje
                 </div>
 
                 <input class="block-content-field" placeholder="Wpisz numer telefonu" maxlength="9" required
@@ -13314,9 +13314,15 @@
                     wpłynie na zgodność z prawem przetwarzania danych, których dokonano przed
                     ich
                     wycofaniem.</br>
-                    Prosimy o zapoznanie się z informacjami dotyczącymi <b>przetwarzania.</b>
+                    <span>Prosimy o zapoznanie się z informacjami dotyczącymi
+                    <b>przetwarzania.</b>
+                </span>
                 </p>
-                <button class="block-content-button text" onclick="popup.submitEventHandler()">Wyślij</button>
+
+                <button class="block-content-button text" id="submit-button"
+                        onclick="popup.submitEventHandler(event)">
+                    Wyślij
+                </button>
             </div>
             <div class="block-right-img block-phones-img"></div>
         </div>

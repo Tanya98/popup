@@ -157,10 +157,11 @@ body {
   margin-bottom: 28px;
 }
 .main-block-popup .main-content .block-content .result-message {
+  text-align: justify;
   width: 100%;
   background: #f9f2f4;
   color: #c7254e;
-  margin: 16px 0px;
+  margin: 16px 0px 0px;
   font-size: 16px;
   font-family: "titilliumweb";
   padding: 10px 10px;
@@ -184,7 +185,7 @@ body {
   outline: none;
 }
 .main-block-popup .main-content .block-content .block-content-field:invalid {
-  outline-color: red;
+  outline-color: transparent;
 }
 .main-block-popup .main-content .block-content .block-content-button {
   border: 0;
@@ -200,6 +201,7 @@ body {
   outline: none;
 }
 .main-block-popup .main-content .block-content .block-content-text {
+  text-align: justify;
   font-size: 10px;
   font-weight: 400;
   line-height: 1.2;

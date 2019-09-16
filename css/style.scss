@@ -34,9 +34,6 @@ body {
     z-index: 900000;
     width: 713px;
     margin: 30px auto;
-    //transition: all 3s ease-in-out;
-    //height: 0px;
-    //overflow: hidden;
   }
 
   .popup-header {
@@ -66,7 +63,6 @@ body {
   .popup-container {
     display: flex;
     flex-direction: column;
-    //width: 685px;
     min-height: 595px;
 
 
@@ -195,10 +191,11 @@ body {
       margin-bottom: 28px;
 
       .result-message {
+        text-align: justify;
         width: 100%;
         background: #f9f2f4;
         color: #c7254e;
-        margin: 16px 0px;
+        margin: 16px 0px 0px;
         font-size: 16px;
         font-family: "titilliumweb";
         padding: 10px 10px;
@@ -224,7 +221,7 @@ body {
         }
 
         &:invalid {
-          outline-color: red;
+          outline-color: transparent;
         }
       }
 
@@ -244,6 +241,7 @@ body {
       }
 
       .block-content-text {
+        text-align: justify;
         font-size: 10px;
         font-weight: 400;
         line-height: 1.2;

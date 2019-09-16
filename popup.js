@@ -1,3 +1,4 @@
+var submitButton = document.getElementById('submit-button');
 function CookieService() {
     this.setCookie = function (key, value) {
         document.cookie = key + "=" + value;
@@ -13,7 +14,12 @@ function CookieService() {
 
 function HttpService() {
     this.post = function (url, body, callback) {
-        callback({EntryStatus: 1});
+        setTimeout(() => {
+            callback({ EntryStatus: 1 });
+            submitButton.style.background = 'linear-gradient(0deg, #a9d156 0%, #abd35b 83%, #bcdd7a 100%)';
+            submitButton.style.color = '#174c2e';
+        }, 2000);
+
         var xhr = new XMLHttpRequest();
         var response;
 
@@ -48,7 +54,9 @@ function Popup(elementId) {
 
     this.show = function () {
         var popup = document.getElementById(elementId);
+        var form = document.getElementById('form');
         $(popup).show();
+        form.classList.add('animation');
     };
 
     this.hide = function () {
@@ -57,7 +65,7 @@ function Popup(elementId) {
 
     };
 
-    this.submitEventHandler = function (event) {
+    this.submitEventHandler = function () {
     };
 }
 
@@ -82,6 +90,8 @@ var isNewUser = Boolean(newUser.getCookie('isNew'));
 $(phoneNumber).mask('999999999');
 
 popup.submitEventHandler = function (event) {
+    submitButton.style.background = '#d0cbcb';
+    submitButton.style.color = '#000';
     sendPhoneNumber(phoneNumber.value, function (response) {
         if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
             phoneNumberSaved.style.display = 'block';

@@ -6,6 +6,7 @@ $color_text: #174c2e;
 
 body {
   position: relative !important;
+  font-family: 'titilliumweb';
 }
 
 .containerMenu {
@@ -28,6 +29,12 @@ body {
     position: absolute;
     z-index: -1;
     // overflow-y: scroll;
+  }
+
+  .animation {
+    animation-duration: 1s;
+    // animation-delay: 0.5s;
+    animation-iteration-count: 1;
   }
 
   .popup-container {
@@ -54,12 +61,6 @@ body {
       }
     }
   }
-
-  .animated {
-    animation-duration: 3s;
-    animation-delay: 12s;
-  }
-
   .popup-container {
     display: flex;
     flex-direction: column;
@@ -386,6 +387,10 @@ body {
         .block-content {
           .block-content-text {
             font-size: 12.5px;
+
+            b {
+              font-weight: 400;
+            }
           }
         }
       }

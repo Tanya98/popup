@@ -61,11 +61,7 @@ function Popup(elementId) {
     };
 
     this.hide = function () {
-        form.classList.remove('slideInDown', 'animation');
-        form.classList.add('fadeOut', 'animation2');
-        setTimeout(function () {
-            $(popup).hide();
-        }, 300);
+        $(popup).hide();
     };
 
     this.submitEventHandler = function () {

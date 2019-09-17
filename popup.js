@@ -1,4 +1,5 @@
 var submitButton = document.getElementById('submit-button');
+
 function CookieService() {
     this.setCookie = function (key, value) {
         document.cookie = key + "=" + value;
@@ -15,7 +16,7 @@ function CookieService() {
 function HttpService() {
     this.post = function (url, body, callback) {
         setTimeout(() => {
-            callback({ EntryStatus: 1 });
+            callback({EntryStatus: 1});
             submitButton.style.background = 'linear-gradient(0deg, #a9d156 0%, #abd35b 83%, #bcdd7a 100%)';
             submitButton.style.color = '#174c2e';
         }, 2000);
@@ -51,18 +52,20 @@ function setDate() {
 }
 
 function Popup(elementId) {
+    var form = document.getElementById('form');
+    var popup = document.getElementById(elementId);
 
     this.show = function () {
-        var popup = document.getElementById(elementId);
-        var form = document.getElementById('form');
         $(popup).show();
         form.classList.add('animation');
     };
 
     this.hide = function () {
-        var popup = document.getElementById(elementId);
-        $(popup).hide();
-
+        form.classList.remove('slideInDown', 'animation');
+        form.classList.add('fadeOut', 'animation2');
+        setTimeout(function () {
+            $(popup).hide();
+        }, 300);
     };
 
     this.submitEventHandler = function () {
@@ -75,6 +78,7 @@ var userDate = setDate();
 
 var popupCounter = 0;
 var userRegistered = false;
+var changeColorCount = 0;
 
 var widthBody = document.body.clientWidth;
 var clientExists = document.getElementById('clientExists');
@@ -90,8 +94,11 @@ var isNewUser = Boolean(newUser.getCookie('isNew'));
 $(phoneNumber).mask('999999999');
 
 popup.submitEventHandler = function (event) {
-    submitButton.style.background = '#d0cbcb';
-    submitButton.style.color = '#000';
+    if (changeColorCount < 1) {
+        submitButton.style.background = '#d0cbcb';
+        submitButton.style.color = '#000';
+        changeColorCount++;
+    }
     sendPhoneNumber(phoneNumber.value, function (response) {
         if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
             phoneNumberSaved.style.display = 'block';
@@ -101,6 +108,19 @@ popup.submitEventHandler = function (event) {
     });
     event.preventDefault();
 };
+
+function sendPhoneNumber(phoneNumber, callback) {
+    var requestBody = {
+        AuthInfo: {
+            AccessKey: 'c9b64244-2dc8-44db-89a5-c6ae72997bbc',
+            ServiceUrl: ''
+        },
+        phoneNumber: phoneNumber
+    };
+
+    var http = new HttpService();
+    http.post('http://dev-by-9/ecs_long/api/CustomerModule/AddPhoneNumberToAntiAbandonTool', requestBody, callback);
+}
 
 $(document).ready(function () {
 
@@ -139,28 +159,11 @@ function hidePopUp() {
 }
 
 document.body.addEventListener('keydown', function (event) {
-    console.log(event.key);
-});
-
-document.body.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         newUser.setCookie('isNew', 'false');
         popup.hide();
     }
 });
-
-function sendPhoneNumber(phoneNumber, callback) {
-    var requestBody = {
-        AuthInfo: {
-            AccessKey: 'c9b64244-2dc8-44db-89a5-c6ae72997bbc',
-            ServiceUrl: ''
-        },
-        phoneNumber: phoneNumber
-    };
-
-    var http = new HttpService();
-    http.post('http://dev-by-9/ecs_long/api/CustomerModule/AddPhoneNumberToAntiAbandonTool', requestBody, callback);
-}
 
 function isNumber(event) {
     if (event.keyCode || event.which) {

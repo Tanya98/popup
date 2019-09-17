@@ -24,7 +24,11 @@ body {
   z-index: -1;
 }
 .main-block-popup .animation {
-  animation-duration: 1s;
+  animation-duration: 0.7s;
+  animation-iteration-count: 1;
+}
+.main-block-popup .animation2 {
+  animation-duration: 0.2s;
   animation-iteration-count: 1;
 }
 .main-block-popup .popup-container {
@@ -206,7 +210,14 @@ body {
   font-size: 10px;
   font-weight: 400;
   line-height: 1.2;
-  margin: 16px 0px;
+  margin: 16px 0px 10px;
+}
+.main-block-popup .main-content .block-content .span {
+  text-align: justify;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 16px;
 }
 
 .opacity {
@@ -242,6 +253,9 @@ body {
     width: 100%;
   }
   .main-block-popup .popup-container .main-content .block-content .block-content-text {
+    font-size: 13.5px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .span {
     font-size: 13.5px;
   }
   .main-block-popup .popup-container .main-content .block-content .block-content-button {
@@ -305,8 +319,8 @@ body {
   .main-block-popup .popup-container .main-content .block-content .block-content-text {
     font-size: 12.5px;
   }
-  .main-block-popup .popup-container .main-content .block-content .block-content-text b {
-    font-weight: 400;
+  .main-block-popup .popup-container .main-content .block-content .span {
+    font-size: 13.5px;
   }
   .main-block-popup .popup-container .block-top .block-top-container .block-phone-img {
     left: 100px;

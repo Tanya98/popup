@@ -32,8 +32,13 @@ body {
   }
 
   .animation {
-    animation-duration: 1s;
+    animation-duration: 0.7s;
     // animation-delay: 0.5s;
+    animation-iteration-count: 1;
+  }
+
+  .animation2 {
+    animation-duration: 0.2s;
     animation-iteration-count: 1;
   }
 
@@ -61,6 +66,7 @@ body {
       }
     }
   }
+
   .popup-container {
     display: flex;
     flex-direction: column;
@@ -246,7 +252,15 @@ body {
         font-size: 10px;
         font-weight: 400;
         line-height: 1.2;
-        margin: 16px 0px;
+        margin: 16px 0px 10px;
+      }
+
+      .span {
+        text-align: justify;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1.2;
+        margin-bottom: 16px;
       }
     }
   }
@@ -299,10 +313,15 @@ body {
             font-size: 13.5px;
           }
 
+          .span {
+            font-size: 13.5px;
+          }
+
           .block-content-button {
             width: 100%;
             font-weight: 500;
           }
+
         }
       }
 
@@ -387,10 +406,9 @@ body {
         .block-content {
           .block-content-text {
             font-size: 12.5px;
-
-            b {
-              font-weight: 400;
-            }
+          }
+          .span{
+            font-size: 13.5px;
           }
         }
       }

@@ -17,8 +17,6 @@ function HttpService() {
     this.post = function (url, body, callback) {
         setTimeout(() => {
             callback({EntryStatus: 1});
-            submitButton.style.background = 'linear-gradient(0deg, #a9d156 0%, #abd35b 83%, #bcdd7a 100%)';
-            submitButton.style.color = '#174c2e';
         }, 2000);
 
         var xhr = new XMLHttpRequest();
@@ -83,11 +81,15 @@ $(phoneNumber).mask('999999999');
 
 popup.submitEventHandler = function (event) {
     if (changeColorCount < 1) {
-        submitButton.style.background = '#d0cbcb';
-        submitButton.style.color = '#000';
+        submitButton.classList.remove('defaultStyles');
+        submitButton.classList.add('additionalStyles');
         changeColorCount++;
     }
     sendPhoneNumber(phoneNumber.value, function (response) {
+        if (response) {
+            submitButton.classList.remove('additionalStyles');
+            submitButton.classList.add('defaultStyles');
+        }
         if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
             phoneNumberSaved.style.display = 'block';
         } else if (response.EntryStatus === 3) {

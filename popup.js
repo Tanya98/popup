@@ -1,17 +1,17 @@
 var submitButton = document.getElementById('submit-button');
 
-function CookieService() {
-    this.setCookie = function (key, value) {
-        document.cookie = key + "=" + value;
-    };
-
-    this.getCookie = function (key) {
-        var matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + key.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-    }
-}
+// function CookieService() {
+//     this.setCookie = function (key, value) {
+//         document.cookie = key + "=" + value;
+//     };
+//
+//     this.getCookie = function (key) {
+//         var matches = document.cookie.match(new RegExp(
+//             "(?:^|; )" + key.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+//         ));
+//         return matches ? decodeURIComponent(matches[1]) : undefined;
+//     }
+// }
 
 function HttpService() {
     this.post = function (url, body, callback) {
@@ -55,12 +55,32 @@ function Popup(elementId) {
         $(popup).hide();
     };
 
-    this.submitEventHandler = function () {
+    this.submitEventHandler = function (event) {
+
+            submitButton.classList.remove('defaultStyles');
+            submitButton.classList.add('additionalStyles');
+            submitButton.setAttribute('disabled', '');
+            changeColorCount++;
+            console.log(submitButton.getAttribute('disabled'));
+
+        sendPhoneNumber(phoneNumber.value, function (response) {
+            if (response) {
+                submitButton.classList.remove('additionalStyles');
+                submitButton.classList.add('defaultStyles');
+                submitButton.removeAttribute('disabled');
+                console.log(submitButton.getAttribute('disabled'));
+            }
+            if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
+                phoneNumberSaved.style.display = 'block';
+            } else if (response.EntryStatus === 3) {
+                clientExists.style.display = 'block';
+            }
+        });
+        event.preventDefault();
     };
 }
 
 var popup = new Popup('popup');
-var cookie = new CookieService();
 var userDate = setDate();
 
 var popupCounter = 0;
@@ -73,31 +93,31 @@ var clientExists = document.getElementById('clientExists');
 var phoneNumberSaved = document.getElementById('phoneNumberSaved');
 var phoneNumber = document.getElementById('phone_number');
 
-var cookieDate = new Date();
-cookieDate.setFullYear(cookieDate.getFullYear() + 50);
-var isNewUser = Boolean(cookie.getCookie('isNew'));
+// var cookieDate = new Date();
+// cookieDate.setFullYear(cookieDate.getFullYear() + 50);
+// var isNewUser = Boolean(cookie.getCookie('isNew'));
 
 $(phoneNumber).mask('999999999');
 
-popup.submitEventHandler = function (event) {
-    if (changeColorCount < 1) {
-        submitButton.classList.remove('defaultStyles');
-        submitButton.classList.add('additionalStyles');
-        changeColorCount++;
-    }
-    sendPhoneNumber(phoneNumber.value, function (response) {
-        if (response) {
-            submitButton.classList.remove('additionalStyles');
-            submitButton.classList.add('defaultStyles');
-        }
-        if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
-            phoneNumberSaved.style.display = 'block';
-        } else if (response.EntryStatus === 3) {
-            clientExists.style.display = 'block';
-        }
-    });
-    event.preventDefault();
-};
+// popup.submitEventHandler = function (event) {
+// if (changeColorCount < 1) {
+//     submitButton.classList.remove('defaultStyles');
+//     submitButton.classList.add('additionalStyles');
+//     changeColorCount++;
+// }
+// sendPhoneNumber(phoneNumber.value, function (response) {
+//     if (response) {
+//         submitButton.classList.remove('additionalStyles');
+//         submitButton.classList.add('defaultStyles');
+//     }
+//     if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
+//         phoneNumberSaved.style.display = 'block';
+//     } else if (response.EntryStatus === 3) {
+//         clientExists.style.display = 'block';
+//     }
+// });
+// event.preventDefault();
+// };
 
 function sendPhoneNumber(phoneNumber, callback) {
     var requestBody = {
@@ -113,14 +133,14 @@ function sendPhoneNumber(phoneNumber, callback) {
 }
 
 $(document).ready(function () {
-    if (isNewUser === true) {
-        showPopUp();
-    } else {
-        hidePopUp();
-    }
+    // if (isNewUser === true) {
+    enableAntiAbandonPopUp();
+    // } else {
+    //     hidePopUp();
+    // }
 });
 
-function showPopUp() {
+function enableAntiAbandonPopUp() {
     document.body.addEventListener('mousemove', function (event) {
         if (event.clientY === 20 || event.clientY < 20) {
             if (popupCounter < 1) {
@@ -142,20 +162,12 @@ function showPopUp() {
 function hidePopUp() {
     var close = document.getElementsByClassName('hide-popup');
     if (close) {
-        cookie.setCookie('isNew', 'false');
-        cookie.setCookie('expires', cookieDate.toUTCString());
-        cookie.setCookie('path', '/');
-        cookie.setCookie('dateTime', userDate);
         popup.hide();
     }
 }
 
 document.body.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
-        cookie.setCookie('isNew', 'false');
-        cookie.setCookie('expires', cookieDate.toUTCString());
-        cookie.setCookie('path', '/');
-        cookie.setCookie('dateTime', userDate);
         popup.hide();
     }
 });

@@ -205,6 +205,14 @@ body {
 .main-block-popup .main-content .block-content .block-content-button:focus {
   outline: none;
 }
+.main-block-popup .main-content .block-content .defaultStyles {
+  background: linear-gradient(0deg, #a9d156 0%, #abd35b 83%, #bcdd7a 100%);
+  color: #174c2e;
+}
+.main-block-popup .main-content .block-content .additionalStyles {
+  background: #d0cbcb;
+  color: #000;
+}
 .main-block-popup .main-content .block-content .block-content-text {
   text-align: justify;
   font-size: 10px;

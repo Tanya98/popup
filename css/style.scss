@@ -247,6 +247,16 @@ body {
         }
       }
 
+      .defaultStyles {
+        background: linear-gradient(0deg, rgb(169, 209, 86) 0%, rgb(171, 211, 91) 83%, rgb(188, 221, 122) 100%);
+        color: #174c2e;
+      }
+
+      .additionalStyles {
+        background: #d0cbcb;
+        color: #000;
+      }
+
       .block-content-text {
         text-align: justify;
         font-size: 10px;
@@ -407,7 +417,8 @@ body {
           .block-content-text {
             font-size: 12.5px;
           }
-          .span{
+
+          .span {
             font-size: 13.5px;
           }
         }

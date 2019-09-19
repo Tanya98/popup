@@ -40,15 +40,8 @@ function HttpService() {
 
 function setDate() {
     var now = new Date();
-    var month = now.getMonth();
-    var year = now.getFullYear();
-    var num = now.getDate();
-    var hours = now.getHours();
-    var minutes = now.getMinutes();
-    var date = month + '/' + num + '/' + year;
-    var time = hours + ':' + minutes;
-    var userDate = date + ' ' + time;
-    return userDate;
+    now.toUTCString();
+    return now;
 }
 
 function Popup(elementId) {
@@ -69,23 +62,22 @@ function Popup(elementId) {
 }
 
 var popup = new Popup('popup');
-var newUser = new CookieService();
+var cookie = new CookieService();
 var userDate = setDate();
 
 var popupCounter = 0;
-var userRegistered = false;
 var changeColorCount = 0;
 
 var widthBody = document.body.clientWidth;
+var screenXS = 576 + 'px';
+
 var clientExists = document.getElementById('clientExists');
 var phoneNumberSaved = document.getElementById('phoneNumberSaved');
 var phoneNumber = document.getElementById('phone_number');
-var screenXS = 576 + 'px';
 
-newUser.setCookie('isNew', 'true');
-newUser.setCookie('DateTime', userDate);
-
-var isNewUser = Boolean(newUser.getCookie('isNew'));
+var cookieDate = new Date();
+cookieDate.setFullYear(cookieDate.getFullYear() + 50);
+var isNewUser = Boolean(cookie.getCookie('isNew'));
 
 $(phoneNumber).mask('999999999');
 
@@ -119,16 +111,15 @@ function sendPhoneNumber(phoneNumber, callback) {
 }
 
 $(document).ready(function () {
-
-    if (userRegistered === true) {
-        hidePopUp();
-    } else {
+    if (isNewUser === true) {
         showPopUp();
+    } else {
+        hidePopUp();
     }
 });
 
 function showPopUp() {
-    document.onmousemove = function (event) {
+    document.body.addEventListener('mousemove', function (event) {
         if (event.clientY === 20 || event.clientY < 20) {
             if (popupCounter < 1) {
                 setTimeout(function () {
@@ -137,7 +128,7 @@ function showPopUp() {
                 popupCounter++;
             }
         }
-    };
+    });
 
     if (widthBody + 'px' <= screenXS) {
         setTimeout(function () {
@@ -148,15 +139,21 @@ function showPopUp() {
 
 function hidePopUp() {
     var close = document.getElementsByClassName('hide-popup');
-    newUser.setCookie('isNew', 'false');
     if (close) {
+        cookie.setCookie('isNew', 'false');
+        cookie.setCookie('expires', cookieDate.toUTCString());
+        cookie.setCookie('path', '/');
+        cookie.setCookie('dateTime', userDate);
         popup.hide();
     }
 }
 
 document.body.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
-        newUser.setCookie('isNew', 'false');
+        cookie.setCookie('isNew', 'false');
+        cookie.setCookie('expires', cookieDate.toUTCString());
+        cookie.setCookie('path', '/');
+        cookie.setCookie('dateTime', userDate);
         popup.hide();
     }
 });

@@ -17,13 +17,10 @@ function localStorageService() {
         let antiAbandonPopUp = JSON.stringify(userParams);
         localStorage.setItem('antiAbandonPopUp', antiAbandonPopUp);
     }
+    
     this.getUserItem = function (str) {
         let result = JSON.parse(localStorage.getItem(str));
         return result;
-    }
-
-    this.removeUserItem = function (str) {
-        localStorage.removeItem(str);
     }
 }
 
@@ -105,7 +102,7 @@ var popup = new Popup();
 var localStorageService = new localStorageService();
 
 var userLogged = false;
-var popUpOpened = true;
+var popUpOpened = false;
 
 var widthBody = document.body.clientWidth;
 var screenXS = 576 + 'px';
@@ -135,12 +132,23 @@ function enableAntiAbandonPopUp() {
             }
         }
     });
+    console.log(popUpOpened);
 
     if (widthBody + 'px' <= screenXS) {
         setTimeout(function () {
+            popUpOpened = true;
             popup.show();
         }, 5000);
     }
+
+    document.body.addEventListener('keydown', function (event) {
+        if (popUpOpened === true) {
+            if (event.key === 'Escape') {
+                popup.hide();
+                popUpOpened = false;
+            }
+        }
+    });
 }
 
 function disableAntiAbandonPopUp() {
@@ -150,15 +158,7 @@ function disableAntiAbandonPopUp() {
         popUpOpened = false;
     }
 }
-if (!popUpOpened) {
-    document.body.addEventListener('keydown', function (event) {
-        alert('works');
-        if (event.key === 'Escape') {
-            popup.hide();
-            popUpOpened = false;
-        }
-    });
-}
+
 
 function isNumber(event) {
     if (event.keyCode || event.which) {

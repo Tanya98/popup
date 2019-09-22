@@ -1,22 +1,36 @@
 var submitButton = document.getElementById('submit-button');
 
-// function CookieService() {
-//     this.setCookie = function (key, value) {
-//         document.cookie = key + "=" + value;
-//     };
-//
-//     this.getCookie = function (key) {
-//         var matches = document.cookie.match(new RegExp(
-//             "(?:^|; )" + key.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-//         ));
-//         return matches ? decodeURIComponent(matches[1]) : undefined;
-//     }
-// }
+var clientExistsMessage = document.getElementById('clientExists');
+var phoneNumberSavedMessage = document.getElementById('phoneNumberSaved');
+var phoneNumber = document.getElementById('phone_number');
+
+$(phoneNumber).mask('999999999');
+
+function localStorageService() {
+
+    this.setUserItem = function (userStatus, userDate) {
+        let userParams = {
+            isNew: userStatus,
+            dateTime: userDate
+        }
+
+        let antiAbandonPopUp = JSON.stringify(userParams);
+        localStorage.setItem('antiAbandonPopUp', antiAbandonPopUp);
+    }
+    this.getUserItem = function (str) {
+        let result = JSON.parse(localStorage.getItem(str));
+        return result;
+    }
+
+    this.removeUserItem = function (str) {
+        localStorage.removeItem(str);
+    }
+}
 
 function HttpService() {
     this.post = function (url, body, callback) {
         setTimeout(() => {
-            callback({EntryStatus: 1});
+            callback({ EntryStatus: 1 });
         }, 2000);
 
         var xhr = new XMLHttpRequest();
@@ -36,15 +50,9 @@ function HttpService() {
     }
 }
 
-function setDate() {
-    var now = new Date();
-    now.toUTCString();
-    return now;
-}
-
-function Popup(elementId) {
+function Popup() {
     var form = document.getElementById('form');
-    var popup = document.getElementById(elementId);
+    var popup = document.getElementById('popup');
 
     this.show = function () {
         $(popup).show();
@@ -52,72 +60,31 @@ function Popup(elementId) {
     };
 
     this.hide = function () {
+        localStorageService.setUserItem(false, date);
         $(popup).hide();
     };
 
     this.submitEventHandler = function (event) {
 
-            submitButton.classList.remove('defaultStyles');
-            submitButton.classList.add('additionalStyles');
-            submitButton.setAttribute('disabled', '');
-            changeColorCount++;
-            console.log(submitButton.getAttribute('disabled'));
+        submitButton.classList.remove('defaultStyles');
+        submitButton.classList.add('additionalStyles');
+        submitButton.setAttribute('disabled', '');
 
         sendPhoneNumber(phoneNumber.value, function (response) {
             if (response) {
                 submitButton.classList.remove('additionalStyles');
                 submitButton.classList.add('defaultStyles');
                 submitButton.removeAttribute('disabled');
-                console.log(submitButton.getAttribute('disabled'));
             }
             if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
-                phoneNumberSaved.style.display = 'block';
+                phoneNumberSavedMessage.style.display = 'block';
             } else if (response.EntryStatus === 3) {
-                clientExists.style.display = 'block';
+                clientExistsMessage.style.display = 'block';
             }
         });
         event.preventDefault();
     };
 }
-
-var popup = new Popup('popup');
-var userDate = setDate();
-
-var popupCounter = 0;
-var changeColorCount = 0;
-
-var widthBody = document.body.clientWidth;
-var screenXS = 576 + 'px';
-
-var clientExists = document.getElementById('clientExists');
-var phoneNumberSaved = document.getElementById('phoneNumberSaved');
-var phoneNumber = document.getElementById('phone_number');
-
-// var cookieDate = new Date();
-// cookieDate.setFullYear(cookieDate.getFullYear() + 50);
-// var isNewUser = Boolean(cookie.getCookie('isNew'));
-
-$(phoneNumber).mask('999999999');
-
-// popup.submitEventHandler = function (event) {
-// if (changeColorCount < 1) {
-//     submitButton.classList.remove('defaultStyles');
-//     submitButton.classList.add('additionalStyles');
-//     changeColorCount++;
-// }
-// sendPhoneNumber(phoneNumber.value, function (response) {
-//     if (response) {
-//         submitButton.classList.remove('additionalStyles');
-//         submitButton.classList.add('defaultStyles');
-//     }
-//     if (response.EntryStatus === 1 || response.EntryStatus === 2 || response.EntryStatus === 4) {
-//         phoneNumberSaved.style.display = 'block';
-//     } else if (response.EntryStatus === 3) {
-//         clientExists.style.display = 'block';
-//     }
-// });
-// event.preventDefault();
-// };
 
 function sendPhoneNumber(phoneNumber, callback) {
     var requestBody = {
@@ -132,21 +99,38 @@ function sendPhoneNumber(phoneNumber, callback) {
     http.post('http://dev-by-9/ecs_long/api/CustomerModule/AddPhoneNumberToAntiAbandonTool', requestBody, callback);
 }
 
+var popupCounter = 0;
+var date = new Date().getTime();
+var popup = new Popup();
+var localStorageService = new localStorageService();
+
+var userLogged = false;
+var popUpOpened = true;
+
+var widthBody = document.body.clientWidth;
+var screenXS = 576 + 'px';
+
+let antiAbandonPopUp = localStorageService.getUserItem('antiAbandonPopUp');
+
 $(document).ready(function () {
-    // if (isNewUser === true) {
-    enableAntiAbandonPopUp();
-    // } else {
-    //     hidePopUp();
-    // }
+    if (userLogged === false && antiAbandonPopUp === null || antiAbandonPopUp.isNew === true) {
+        localStorageService.setUserItem(true, date);
+        enableAntiAbandonPopUp();
+
+    } else if (userLogged === true && antiAbandonPopUp === null) {
+        localStorageService.setUserItem(false, date);
+    }
 });
 
 function enableAntiAbandonPopUp() {
     document.body.addEventListener('mousemove', function (event) {
-        if (event.clientY === 20 || event.clientY < 20) {
+        if (event.clientY <= 20) {
             if (popupCounter < 1) {
+                popUpOpened = true;
                 setTimeout(function () {
                     popup.show();
-                }, 200);
+                    console.log(popUpOpened);
+                }, 150);
                 popupCounter++;
             }
         }
@@ -159,18 +143,22 @@ function enableAntiAbandonPopUp() {
     }
 }
 
-function hidePopUp() {
+function disableAntiAbandonPopUp() {
     var close = document.getElementsByClassName('hide-popup');
     if (close) {
         popup.hide();
+        popUpOpened = false;
     }
 }
-
-document.body.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-        popup.hide();
-    }
-});
+if (!popUpOpened) {
+    document.body.addEventListener('keydown', function (event) {
+        alert('works');
+        if (event.key === 'Escape') {
+            popup.hide();
+            popUpOpened = false;
+        }
+    });
+}
 
 function isNumber(event) {
     if (event.keyCode || event.which) {

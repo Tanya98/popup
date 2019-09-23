@@ -97,7 +97,7 @@ function sendPhoneNumber(phoneNumber, callback) {
 }
 
 var popupCounter = 0;
-var date = new Date().getTime();
+var date = new Date();
 var popup = new Popup();
 var lstorageService = new LocalStorageService();
 

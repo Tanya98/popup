@@ -27,7 +27,7 @@ function LocalStorageService() {
 function HttpService() {
     this.post = function (url, body, callback) {
         setTimeout(() => {
-            callback({EntryStatus: 1});
+            callback({ EntryStatus: 1 });
         }, 2000);
 
         var xhr = new XMLHttpRequest();
@@ -110,8 +110,11 @@ var screenXS = 576 + 'px';
 let antiAbandonPopUp = lstorageService.getUserItem('antiAbandonPopUp');
 
 $(document).ready(function () {
-    if (userLogged === false && antiAbandonPopUp === null || antiAbandonPopUp !== null && antiAbandonPopUp.isNew === true) {
+    if (userLogged === false && antiAbandonPopUp === null) {
         lstorageService.setUserItem(true, date);
+        activateAntiAbandonPopUp();
+
+    } else if (userLogged === false && antiAbandonPopUp.isNew === true) {
         activateAntiAbandonPopUp();
 
     } else if (userLogged === true && antiAbandonPopUp === null) {

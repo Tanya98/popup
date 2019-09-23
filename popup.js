@@ -6,7 +6,7 @@ var phoneNumber = document.getElementById('phone_number');
 
 $(phoneNumber).mask('999999999');
 
-function localStorageService() {
+function LocalStorageService() {
 
     this.setUserItem = function (userStatus, userDate) {
         let userParams = {
@@ -57,7 +57,7 @@ function Popup() {
     };
 
     this.hide = function () {
-        localStorageService.setUserItem(false, date);
+        lstorageService.setUserItem(false, date);
         $(popup).hide();
     };
 
@@ -99,7 +99,7 @@ function sendPhoneNumber(phoneNumber, callback) {
 var popupCounter = 0;
 var date = new Date().getTime();
 var popup = new Popup();
-var localStorageService = new localStorageService();
+var lstorageService = new LocalStorageService();
 
 var userLogged = false;
 var popUpIsOpened = false;
@@ -107,15 +107,15 @@ var popUpIsOpened = false;
 var widthBody = document.body.clientWidth;
 var screenXS = 576 + 'px';
 
-let antiAbandonPopUp = localStorageService.getUserItem('antiAbandonPopUp');
+let antiAbandonPopUp = lstorageService.getUserItem('antiAbandonPopUp');
 
 $(document).ready(function () {
     if (userLogged === false && antiAbandonPopUp === null || antiAbandonPopUp !== null && antiAbandonPopUp.isNew === true) {
-        localStorageService.setUserItem(true, date);
+        lstorageService.setUserItem(true, date);
         activateAntiAbandonPopUp();
 
     } else if (userLogged === true && antiAbandonPopUp === null) {
-        localStorageService.setUserItem(false, date);
+        lstorageService.setUserItem(false, date);
     }
 });
 

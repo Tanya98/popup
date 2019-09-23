@@ -12,22 +12,22 @@ function localStorageService() {
         let userParams = {
             isNew: userStatus,
             dateTime: userDate
-        }
+        };
 
         let antiAbandonPopUp = JSON.stringify(userParams);
         localStorage.setItem('antiAbandonPopUp', antiAbandonPopUp);
-    }
-    
+    };
+
     this.getUserItem = function (str) {
         let result = JSON.parse(localStorage.getItem(str));
         return result;
-    }
+    };
 }
 
 function HttpService() {
     this.post = function (url, body, callback) {
         setTimeout(() => {
-            callback({ EntryStatus: 1 });
+            callback({EntryStatus: 1});
         }, 2000);
 
         var xhr = new XMLHttpRequest();
@@ -102,7 +102,7 @@ var popup = new Popup();
 var localStorageService = new localStorageService();
 
 var userLogged = false;
-var popUpOpened = false;
+var popUpIsOpened = false;
 
 var widthBody = document.body.clientWidth;
 var screenXS = 576 + 'px';
@@ -110,55 +110,54 @@ var screenXS = 576 + 'px';
 let antiAbandonPopUp = localStorageService.getUserItem('antiAbandonPopUp');
 
 $(document).ready(function () {
-    if (userLogged === false && antiAbandonPopUp === null || antiAbandonPopUp.isNew === true) {
+    if (userLogged === false && antiAbandonPopUp === null || antiAbandonPopUp !== null && antiAbandonPopUp.isNew === true) {
         localStorageService.setUserItem(true, date);
-        enableAntiAbandonPopUp();
+        activateAntiAbandonPopUp();
 
     } else if (userLogged === true && antiAbandonPopUp === null) {
         localStorageService.setUserItem(false, date);
     }
 });
 
-function enableAntiAbandonPopUp() {
-    document.body.addEventListener('mousemove', function (event) {
-        if (event.clientY <= 20) {
+function activateAntiAbandonPopUp() {
+    document.body.addEventListener('mouseleave', function (event) {
+        if (event.clientY < 100) {
+            popUpIsOpened = true;
             if (popupCounter < 1) {
-                popUpOpened = true;
-                setTimeout(function () {
-                    popup.show();
-                    console.log(popUpOpened);
-                }, 150);
-                popupCounter++;
+                popup.show();
             }
+            popupCounter++;
         }
     });
-    console.log(popUpOpened);
 
     if (widthBody + 'px' <= screenXS) {
-        setTimeout(function () {
-            popUpOpened = true;
-            popup.show();
-        }, 5000);
+        if (popupCounter < 1) {
+            setTimeout(function () {
+                popUpIsOpened = true;
+                popup.show();
+            }, 5000);
+        }
+        popupCounter++;
     }
 
     document.body.addEventListener('keydown', function (event) {
-        if (popUpOpened === true) {
+        if (popUpIsOpened === true) {
             if (event.key === 'Escape') {
                 popup.hide();
-                popUpOpened = false;
+                popUpIsOpened = false;
             }
         }
     });
 }
 
-function disableAntiAbandonPopUp() {
+
+function deactivateAntiAbandonPopUp() {
     var close = document.getElementsByClassName('hide-popup');
     if (close) {
         popup.hide();
-        popUpOpened = false;
+        popUpIsOpened = false;
     }
 }
-
 
 function isNumber(event) {
     if (event.keyCode || event.which) {

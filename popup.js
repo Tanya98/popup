@@ -117,7 +117,7 @@ $(document).ready(function () {
     } else if (userLogged === false && antiAbandonPopUp.isNew === true) {
         activateAntiAbandonPopUp();
 
-    } else if (userLogged === true && antiAbandonPopUp === null || userLogged === true && antiAbandonPopUp.isNew === true) {
+    } else if ((userLogged === true && antiAbandonPopUp === null) || (userLogged === true && antiAbandonPopUp.isNew === true)) {
         lstorageService.setUserItem(false, date);
     }
 });

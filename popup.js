@@ -101,11 +101,11 @@ var date = new Date();
 var popup = new Popup();
 var lstorageService = new LocalStorageService();
 
-var userLogged = true;
+var userLogged = false;
 var popUpIsOpened = false;
 
 var widthBody = document.body.clientWidth;
-var screenXS = 576 + 'px';
+var screenXS = 576;
 
 let antiAbandonPopUp = lstorageService.getUserItem('antiAbandonPopUp');
 
@@ -133,7 +133,7 @@ function activateAntiAbandonPopUp() {
         }
     });
 
-    if (widthBody + 'px' <= screenXS) {
+    if (widthBody <= screenXS) {
         if (popupCounter < 1) {
             setTimeout(function () {
                 popUpIsOpened = true;

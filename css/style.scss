@@ -5,13 +5,13 @@ $color_text: #174c2e;
 }
 
 body {
-  position: relative !important;
+  //position: relative !important;
   font-family: 'titilliumweb';
 }
 
-.containerMenu {
-  z-index: 0 !important;
-}
+//.containerMenu {
+  //z-index: 0 !important;
+//}
 
 .main-block-popup {
   width: 100%;
@@ -28,12 +28,10 @@ body {
     width: 100%;
     position: absolute;
     z-index: -1;
-    // overflow-y: scroll;
   }
 
   .animation {
     animation-duration: 0.7s;
-    // animation-delay: 0.5s;
     animation-iteration-count: 1;
   }
 

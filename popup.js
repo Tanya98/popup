@@ -4,7 +4,7 @@ var clientExistsMessage = document.getElementById('clientExists');
 var phoneNumberSavedMessage = document.getElementById('phoneNumberSaved');
 var phoneNumber = document.getElementById('phone_number');
 
-$(phoneNumber).mask('999999999');
+$(phoneNumber).mask('000000000');
 
 function LocalStorageService() {
 

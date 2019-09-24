@@ -1,10 +1,5 @@
 body {
-  position: relative !important;
   font-family: "titilliumweb";
-}
-
-.containerMenu {
-  z-index: 0 !important;
 }
 
 .main-block-popup {

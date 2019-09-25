@@ -5,7 +5,7 @@ $color_text: #174c2e;
 }
 
 body {
-  //position: relative !important;
+  position: relative !important;
   font-family: 'titilliumweb';
 }
 
@@ -13,9 +13,9 @@ body {
   display: none;
 }
 
-//.containerMenu {
-//z-index: 0 !important;
-//}
+// .containerMenu {
+// z-index: 0 !important;
+// }
 
 .main-block-popup {
   width: 100%;
@@ -387,9 +387,13 @@ body {
 }
 
 @media all and (max-width: 414px) {
+  body {
+    position: inherit !important;
+  }
+
   .main-block-popup {
     .background {
-      height: 92%;
+      height: 91%;
     }
 
     .popup-header {
@@ -494,11 +498,15 @@ body {
 
 @media all and (max-width: 375px) {
   .main-block-popup {
+    .background {
+      height: 90%;
+    }
+
     .popup-container {
       width: 330px;
 
       .main-content {
-        height: 325px;
+        height: 340px;
 
         .block-content {
           .result-message {
@@ -506,7 +514,7 @@ body {
           }
 
           .block-content-field {
-            margin-top: 14px;
+            margin-top: 25px;
           }
 
           .span {
@@ -531,10 +539,10 @@ body {
       }
 
       .block-top {
-        height: 217px;
+        height: 188px;
 
         .block-top-container {
-          margin-top: 75px;
+          margin-top: 60px;
 
           .block-phone-img {
             left: 75px;
@@ -542,6 +550,12 @@ body {
 
           .block-top-title {
             font-size: 38px;
+          }
+        }
+
+        .block-text {
+          .block-top-subtitle {
+            margin-top: 10px;
           }
         }
       }
@@ -572,6 +586,10 @@ body {
 
 @media all and (max-width: 360px) {
   .main-block-popup {
+    .background {
+      height: 90%;
+    }
+
     .popup-container {
       width: 330px;
 
@@ -583,17 +601,17 @@ body {
             font-size: 12px;
           }
 
-          .block-content-field {
-            margin-top: 14px;
-          }
+          // .block-content-field {
+          //   margin-top: 14px;
+          // }
 
           .span {
             margin-bottom: 9px;
           }
 
           .block-content-button {
-            font-size: 25px;
-            height: 60px;
+            font-size: 27px;
+            // height: 60px;
           }
         }
       }
@@ -602,22 +620,22 @@ body {
         height: 30px;
 
         .block-phone-img {
-          width: 115px;
-          height: 115px;
+          width: 105px;
+          height: 105px;
           top: -29px;
 
           img {
-            width: 85px;
+            width: 75px;
             margin: 17px;
           }
         }
       }
 
       .block-top {
-        height: 188px;
+        height: 175px;
 
         .block-top-container {
-          margin-top: 65px;
+          margin-top: 57px;
 
           .block-phone-img {
             left: 75px;
@@ -636,6 +654,7 @@ body {
           .block-top-subtitle {
             font-size: 28px;
             margin-top: 10px;
+            margin-bottom: 5px;
           }
         }
 
@@ -655,11 +674,15 @@ body {
 
 @media all and (max-width: 320px) {
   .main-block-popup {
+    .background {
+      height: 89%;
+    }
+
     .popup-container {
       width: 295px;
 
       .popup-header {
-        height: 30px;
+        height: 18px;
 
         .block-phone-img {
           width: 90px;
@@ -674,18 +697,18 @@ body {
       }
 
       .block-top {
-        height: 157px;
+        height: 150px;
 
         .block-top-container {
-          margin-top: 39px;
+          margin-top: 45px;
 
           .block-top-title {
-            font-size: 35px;
+            font-size: 32px;
           }
 
           .figure-button-block {
             .close-button {
-              top: 20px !important;
+              top: 10px !important;
               width: 20px !important;
               height: 20px !important;
             }
@@ -694,7 +717,7 @@ body {
 
         .block-text {
           .block-top-subtitle {
-            font-size: 27px;
+            font-size: 25px;
             margin-top: 6px;
           }
 
@@ -712,26 +735,29 @@ body {
 
           .result-message {
             font-size: 12px;
-            margin: 9px 0px 0px;
+            margin: 7px 0px 0px;
           }
 
           .block-content-button {
             width: 265px;
+            font-size: 27px
           }
 
           .block-content-field {
-            margin-top: 8px;
-            height: 45px;
+            margin-top: 15px;
+            // height: 45px;
           }
 
           .block-content-text {
+            line-height: 1.1;
             font-size: 11px;
             margin: 9px 0px 10px;
           }
 
           .span {
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             font-size: 11px;
+            line-height: 1.1;
           }
         }
       }

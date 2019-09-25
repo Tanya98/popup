@@ -2,6 +2,10 @@ body {
   font-family: "titilliumweb";
 }
 
+.meshim_widget_components_chatButton_Button {
+  display: none;
+}
+
 .main-block-popup {
   width: 100%;
   height: 100%;
@@ -227,17 +231,9 @@ body {
   opacity: 0.5;
 }
 
-@media all and (max-width: 730px) {
+@media all and (max-width: 768px) {
   .main-block-popup .popup-container {
-    width: 100%;
-  }
-  .main-block-popup .popup-container .block-top .block-top-container .block-top-title {
-    margin: 120px 0px 0px 20px;
-  }
-}
-@media all and (max-width: 675px) {
-  .main-block-popup .popup-container {
-    width: 100%;
+    width: 500px;
   }
   .main-block-popup .popup-container .main-content {
     justify-content: center;
@@ -248,7 +244,7 @@ body {
   .main-block-popup .popup-container .main-content .block-content {
     align-items: center;
     width: 100%;
-    margin: 0px 10px 28px;
+    margin: 0px 24px 28px;
   }
   .main-block-popup .popup-container .main-content .block-content .block-content-field {
     margin-top: 28px;
@@ -311,46 +307,254 @@ body {
     font-size: 24px;
   }
 }
-@media all and (max-width: 380px) {
+@media all and (max-width: 414px) {
+  .main-block-popup .background {
+    height: 92%;
+  }
+  .main-block-popup .popup-header {
+    height: 30px;
+  }
   .main-block-popup .popup-header .block-phone-img {
-    width: 129px;
-    height: 129px;
+    width: 115px;
+    height: 115px;
+    top: -29px;
   }
   .main-block-popup .popup-header .block-phone-img img {
-    margin: 15px;
+    width: 85px;
+    margin: 17px;
+  }
+  .main-block-popup .popup-container {
+    width: 350px;
+    height: 655px;
+    margin: 35px auto;
+  }
+  .main-block-popup .popup-container .main-content {
+    height: 353px;
+  }
+  .main-block-popup .popup-container .main-content .block-content {
+    margin: 0px 23px 28px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .block-content-button {
+    height: 85px;
+    font-size: 32px;
   }
   .main-block-popup .popup-container .main-content .block-content .block-content-text {
-    font-size: 12.5px;
+    font-size: 11.5px;
   }
   .main-block-popup .popup-container .main-content .block-content .span {
-    font-size: 13.5px;
+    font-size: 11.5px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .block-content-field {
+    margin-top: 20px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .result-message {
+    font-size: 12px;
+  }
+  .main-block-popup .popup-container .block-top {
+    height: 244px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container {
+    margin-top: 75px;
   }
   .main-block-popup .popup-container .block-top .block-top-container .block-phone-img {
-    left: 100px;
+    left: 75px;
   }
-  .main-block-popup .popup-container .block-top .block-container .close-button {
-    top: 100px;
+  .main-block-popup .popup-container .block-top .block-top-container .block-top-title {
+    font-size: 41px;
+  }
+  .main-block-popup .popup-container .block-top .block-container .figure-button-block .close-button {
+    top: 30px !important;
     width: 20px !important;
     height: 20px !important;
+  }
+  .main-block-popup .popup-container .block-top .block-text {
+    padding: 0;
   }
   .main-block-popup .popup-container .block-top .block-text .hidden-text {
     display: inline-block;
   }
+  .main-block-popup .popup-container .block-top .block-text .block-top-text {
+    font-size: 21px;
+  }
   .main-block-popup .popup-container .block-top .block-text .hide-text {
     display: none;
   }
+  .main-block-popup .popup-container .block-top .block-text .block-top-subtitle {
+    font-size: 30px;
+    margin-top: 15px;
+  }
+}
+@media all and (max-width: 375px) {
+  .main-block-popup .popup-container {
+    width: 330px;
+  }
+  .main-block-popup .popup-container .main-content {
+    height: 325px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .result-message {
+    font-size: 12px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .block-content-field {
+    margin-top: 14px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .span {
+    margin-bottom: 9px;
+  }
+  .main-block-popup .popup-container .popup-header {
+    height: 30px;
+  }
+  .main-block-popup .popup-container .popup-header .block-phone-img {
+    width: 115px;
+    height: 115px;
+    top: -29px;
+  }
+  .main-block-popup .popup-container .popup-header .block-phone-img img {
+    width: 85px;
+    margin: 17px;
+  }
+  .main-block-popup .popup-container .block-top {
+    height: 217px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container {
+    margin-top: 75px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container .block-phone-img {
+    left: 75px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container .block-top-title {
+    font-size: 38px;
+  }
+  .main-block-popup .popup-container .block-container .figure-button-block .close-button {
+    top: 50px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .main-block-popup .popup-container .block-container .block-text .block-top-text {
+    font-size: 21px;
+  }
+  .main-block-popup .popup-container .block-container .block-text .block-top-subtitle {
+    font-size: 28px;
+    margin-top: 15px;
+  }
 }
 @media all and (max-width: 360px) {
+  .main-block-popup .popup-container {
+    width: 330px;
+  }
+  .main-block-popup .popup-container .main-content {
+    height: 330px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .result-message {
+    font-size: 12px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .block-content-field {
+    margin-top: 14px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .span {
+    margin-bottom: 9px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .block-content-button {
+    font-size: 25px;
+    height: 60px;
+  }
+  .main-block-popup .popup-container .popup-header {
+    height: 30px;
+  }
+  .main-block-popup .popup-container .popup-header .block-phone-img {
+    width: 115px;
+    height: 115px;
+    top: -29px;
+  }
+  .main-block-popup .popup-container .popup-header .block-phone-img img {
+    width: 85px;
+    margin: 17px;
+  }
+  .main-block-popup .popup-container .block-top {
+    height: 188px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container {
+    margin-top: 65px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container .block-phone-img {
+    left: 75px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container .block-top-title {
+    font-size: 37px;
+  }
   .main-block-popup .popup-container .block-top .block-text .block-top-text {
-    font-size: 24px;
+    font-size: 17px;
+  }
+  .main-block-popup .popup-container .block-top .block-text .block-top-subtitle {
+    font-size: 28px;
+    margin-top: 10px;
+  }
+  .main-block-popup .popup-container .block-top .block-container .figure-button-block .close-button {
+    top: 30px !important;
+    width: 20px !important;
+    height: 20px !important;
   }
 }
 @media all and (max-width: 320px) {
+  .main-block-popup .popup-container {
+    width: 295px;
+  }
+  .main-block-popup .popup-container .popup-header {
+    height: 30px;
+  }
+  .main-block-popup .popup-container .popup-header .block-phone-img {
+    width: 90px;
+    height: 90px;
+    top: -29px;
+  }
+  .main-block-popup .popup-container .popup-header .block-phone-img img {
+    width: 64px;
+    margin: 14px;
+  }
+  .main-block-popup .popup-container .block-top {
+    height: 157px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container {
+    margin-top: 39px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container .block-top-title {
+    font-size: 35px;
+  }
+  .main-block-popup .popup-container .block-top .block-top-container .figure-button-block .close-button {
+    top: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .main-block-popup .popup-container .block-top .block-text .block-top-subtitle {
+    font-size: 27px;
+    margin-top: 6px;
+  }
+  .main-block-popup .popup-container .block-top .block-text .block-top-text {
+    font-size: 16px;
+  }
+  .main-block-popup .popup-container .main-content {
+    height: 299px;
+  }
   .main-block-popup .popup-container .main-content .block-content {
-    width: 285px;
+    width: 265px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .result-message {
+    font-size: 12px;
+    margin: 9px 0px 0px;
   }
   .main-block-popup .popup-container .main-content .block-content .block-content-button {
-    width: 285px;
+    width: 265px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .block-content-field {
+    margin-top: 8px;
+    height: 45px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .block-content-text {
+    font-size: 11px;
+    margin: 9px 0px 10px;
+  }
+  .main-block-popup .popup-container .main-content .block-content .span {
+    margin-bottom: 6px;
+    font-size: 11px;
   }
 }
 

@@ -50,15 +50,18 @@ function HttpService() {
 function Popup() {
     var form = document.getElementById('form');
     var popup = document.getElementById('popup');
+    var body = document.body;
 
     this.show = function () {
         $(popup).show();
         form.classList.add('animation');
+        body.style.overflowY = 'hidden';
     };
 
     this.hide = function () {
         lstorageService.setUserItem(false, date);
         $(popup).hide();
+        body.style.overflowY = 'scroll';
     };
 
     this.submitEventHandler = function (event) {
@@ -138,7 +141,7 @@ function activateAntiAbandonPopUp() {
             setTimeout(function () {
                 popUpIsOpened = true;
                 popup.show();
-            }, 5000);
+            }, 1000);
         }
         popupCounter++;
     }

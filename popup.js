@@ -27,7 +27,7 @@ function LocalStorageService() {
 function HttpService() {
     this.post = function (url, body, callback) {
         setTimeout(() => {
-            callback({EntryStatus: 1});
+            callback({ EntryStatus: 1 });
         }, 2000);
 
         var xhr = new XMLHttpRequest();
@@ -47,6 +47,8 @@ function HttpService() {
     }
 }
 
+// var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
 function Popup() {
     var form = document.getElementById('form');
     var popup = document.getElementById('popup');
@@ -56,6 +58,7 @@ function Popup() {
         $(popup).show();
         form.classList.add('animation');
         body.style.overflowY = 'hidden';
+        window.scrollTo(0, 0);
     };
 
     this.hide = function () {
@@ -65,12 +68,12 @@ function Popup() {
     };
 
     this.submitEventHandler = function (event) {
-
         submitButton.classList.remove('defaultStyles');
         submitButton.classList.add('additionalStyles');
         submitButton.setAttribute('disabled', '');
 
         sendPhoneNumber(phoneNumber.value, function (response) {
+
             if (response) {
                 submitButton.classList.remove('additionalStyles');
                 submitButton.classList.add('defaultStyles');
@@ -113,6 +116,7 @@ var screenXS = 576;
 let antiAbandonPopUp = lstorageService.getUserItem('antiAbandonPopUp');
 
 $(document).ready(function () {
+
     if (userLogged === false && antiAbandonPopUp === null) {
         lstorageService.setUserItem(true, date);
         activateAntiAbandonPopUp();
@@ -123,9 +127,20 @@ $(document).ready(function () {
     } else if ((userLogged === true && antiAbandonPopUp === null) || (userLogged === true && antiAbandonPopUp.isNew === true)) {
         lstorageService.setUserItem(false, date);
     }
+
+    // window.addEventListener('scroll', function () {
+    //     // debugger;
+    //     // console.log(pageYOffset);
+    //     if (pageYOffset > 10) {
+    //         pageYOffset = 0;
+    //     }
+    // })
+
+    // alert("Текущая прокрутка: " + scrollTop);
 });
 
 function activateAntiAbandonPopUp() {
+
     document.body.addEventListener('mouseleave', function (event) {
         if (event.clientY < 100) {
             popUpIsOpened = true;

@@ -27,7 +27,7 @@ function LocalStorageService() {
 function HttpService() {
     this.post = function (url, body, callback) {
         setTimeout(() => {
-            callback({ EntryStatus: 1 });
+            callback({EntryStatus: 1});
         }, 2000);
 
         var xhr = new XMLHttpRequest();
@@ -52,19 +52,18 @@ function HttpService() {
 function Popup() {
     var form = document.getElementById('form');
     var popup = document.getElementById('popup');
-    var body = document.body;
 
     this.show = function () {
         $(popup).show();
         form.classList.add('animation');
-        body.style.overflowY = 'hidden';
+        document.body.style.overflowY = 'hidden';
         window.scrollTo(0, 0);
     };
 
     this.hide = function () {
         lstorageService.setUserItem(false, date);
         $(popup).hide();
-        body.style.overflowY = 'scroll';
+        document.body.style.overflowY = 'scroll';
     };
 
     this.submitEventHandler = function (event) {
@@ -87,6 +86,17 @@ function Popup() {
         });
         event.preventDefault();
     };
+
+    // this.removeDisabled = function () {
+    //     debugger;
+    //     if (phoneNumber.validity.valid === true) {
+    //         submitButton.removeAttribute('disabled');
+    //     }
+    // };
+
+    submitButton.addEventListener('click', function (event) {
+        sendPhoneNumber(event);
+    });
 }
 
 function sendPhoneNumber(phoneNumber, callback) {
@@ -127,16 +137,6 @@ $(document).ready(function () {
     } else if ((userLogged === true && antiAbandonPopUp === null) || (userLogged === true && antiAbandonPopUp.isNew === true)) {
         lstorageService.setUserItem(false, date);
     }
-
-    // window.addEventListener('scroll', function () {
-    //     // debugger;
-    //     // console.log(pageYOffset);
-    //     if (pageYOffset > 10) {
-    //         pageYOffset = 0;
-    //     }
-    // })
-
-    // alert("Текущая прокрутка: " + scrollTop);
 });
 
 function activateAntiAbandonPopUp() {
@@ -184,6 +184,8 @@ function isNumber(event) {
     if (event.keyCode || event.which) {
         var code = event.keyCode || event.which;
         if (code !== 46 && code > 31 && (code < 48 || code > 57)) {
+            // console.log(phoneNumber.validity.valid);
+            // popup.removeDisabled();
             return false;
         }
         return true;

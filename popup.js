@@ -2,6 +2,7 @@ var submitButton = document.getElementById('submit-button');
 
 var clientExistsMessage = document.getElementById('clientExists');
 var phoneNumberSavedMessage = document.getElementById('phoneNumberSaved');
+var validationMessage = document.getElementById('validation');
 var phoneNumber = document.getElementById('phone_number');
 
 $(phoneNumber).mask('000000000');
@@ -27,7 +28,7 @@ function LocalStorageService() {
 function HttpService() {
     this.post = function (url, body, callback) {
         setTimeout(() => {
-            callback({EntryStatus: 1});
+            callback({ EntryStatus: 1 });
         }, 2000);
 
         var xhr = new XMLHttpRequest();
@@ -47,7 +48,6 @@ function HttpService() {
     }
 }
 
-// var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
 function Popup() {
     var form = document.getElementById('form');
@@ -57,7 +57,6 @@ function Popup() {
         $(popup).show();
         form.classList.add('animation');
         document.body.style.overflowY = 'hidden';
-        window.scrollTo(0, 0);
     };
 
     this.hide = function () {
@@ -72,7 +71,6 @@ function Popup() {
         submitButton.setAttribute('disabled', '');
 
         sendPhoneNumber(phoneNumber.value, function (response) {
-
             if (response) {
                 submitButton.classList.remove('additionalStyles');
                 submitButton.classList.add('defaultStyles');
@@ -86,17 +84,6 @@ function Popup() {
         });
         event.preventDefault();
     };
-
-    // this.removeDisabled = function () {
-    //     debugger;
-    //     if (phoneNumber.validity.valid === true) {
-    //         submitButton.removeAttribute('disabled');
-    //     }
-    // };
-
-    submitButton.addEventListener('click', function (event) {
-        sendPhoneNumber(event);
-    });
 }
 
 function sendPhoneNumber(phoneNumber, callback) {
@@ -181,11 +168,19 @@ function deactivateAntiAbandonPopUp() {
 }
 
 function isNumber(event) {
-    if (event.keyCode || event.which) {
-        var code = event.keyCode || event.which;
+    var code = event.keyCode || event.which;
+
+    if ((phoneNumber.value.length < 9 || phoneNumber.validity.valid === false) || code === 8) {
+        validationMessage.style.display = 'block';
+        submitButton.setAttribute('disabled', '');
+
+    } else if (phoneNumber.value.length === 9 || phoneNumber.validity.valid === true) {
+        validationMessage.style.display = 'none';
+        submitButton.removeAttribute('disabled');
+    }
+
+    if (code) {
         if (code !== 46 && code > 31 && (code < 48 || code > 57)) {
-            // console.log(phoneNumber.validity.valid);
-            // popup.removeDisabled();
             return false;
         }
         return true;
